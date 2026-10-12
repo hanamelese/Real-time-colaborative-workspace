@@ -70,8 +70,14 @@ export function HeroSection() {
                 </p>
 
                 <div className="mt-8 flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <Link
+                    {/* <Link
                         href="/workspace"
+                        className="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-base flex items-center gap-2 transition shadow-lg shadow-indigo-600/20"
+                    >
+                        Open Interactive Workspace <ArrowRight className="w-4 h-4" />
+                    </Link> */}
+                    <Link
+                        href="/workspace/room-1"
                         className="px-6 py-3.5 bg-indigo-600 hover:bg-indigo-700 text-white font-semibold rounded-xl text-base flex items-center gap-2 transition shadow-lg shadow-indigo-600/20"
                     >
                         Open Interactive Workspace <ArrowRight className="w-4 h-4" />

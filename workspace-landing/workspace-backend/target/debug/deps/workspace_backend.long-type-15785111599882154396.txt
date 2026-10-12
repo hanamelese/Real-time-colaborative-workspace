@@ -1,0 +1,2 @@
+fn(WebSocketUpgrade, axum::extract::Path<String>, State<Arc<DashMap<String, tokio::sync::broadcast::Sender<String>>>>) -> impl futures_util::Future<Output = {type error}> {ws_handler}
+fn(WebSocketUpgrade, axum::extract::Path<String>, State<Arc<DashMap<String, tokio::sync::broadcast::Sender<String>>>>) -> impl futures_util::Future<Output = {type error}> {ws_handler}: Handler<_, _>
