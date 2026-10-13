@@ -300,6 +300,10 @@ async fn get_room_nodes(
     }
 }
 
+// Health check handler for root URL
+async fn health_check() -> &'static str {
+    "🚀 Rust Real-Time Sync Server is live and running!"
+}
 // Handle socket stream, broadcast pipeline, and database persistence
 async fn handle_socket(socket: WebSocket, room_id: String, state: AppState) {
     println!("🔌 Handshake accepted for room: {}", room_id);
