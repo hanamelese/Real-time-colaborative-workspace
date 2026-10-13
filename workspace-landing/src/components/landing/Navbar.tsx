@@ -29,7 +29,7 @@ export function Navbar() {
                         <FaGithub className="w-5 h-5" />
                     </Link>
                     <Link
-                        href="/workspace"
+                        href="/workspace/room-1"
                         className="px-4 py-2 bg-indigo-600 hover:bg-indigo-700 text-white rounded-lg text-sm font-semibold transition shadow-md shadow-indigo-600/15"
                     >
                         Launch Studio
