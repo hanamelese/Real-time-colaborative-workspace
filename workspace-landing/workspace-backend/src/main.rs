@@ -255,11 +255,11 @@ async fn main() {
         .allow_headers(Any);
 
     let app = Router::new()
-        .route("/", get(health_check))
-        .route("/ws/:room_id", get(ws_handler))
-        .route("/api/rooms/:room_id/nodes", get(get_room_nodes))
-        .layer(cors)
-        .with_state(app_state);
+    .route("/", get(health_check))
+    .route("/ws/{room_id}", get(ws_handler))
+    .route("/api/rooms/{room_id}/nodes", get(get_room_nodes))
+    .layer(cors)
+    .with_state(app_state);
 
     // Read Railway's PORT environment variable, or fallback to 8080 locally
     let port = std::env::var("PORT")
