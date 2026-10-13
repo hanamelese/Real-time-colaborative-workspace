@@ -266,7 +266,6 @@
 
 
 
-
 'use client';
 
 import { useState, Suspense, useRef, useEffect } from 'react';
@@ -337,12 +336,11 @@ function WorkspaceContent() {
         },
     ]);
 
-    // Fetch saved node states from SQLite backend on load using environment variable
+    // Fetch saved node states from SQLite backend on load
     useEffect(() => {
         async function fetchSavedNodes() {
             try {
-                const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://real-time-collaborative-workspace-production.up.railway.app';
-                const res = await fetch(`${apiUrl}/api/rooms/${roomId}/nodes`);
+                const res = await fetch(`https://real-time-collaborative-workspace-production.up.railway.app/api/rooms/${roomId}/nodes`);
                 if (res.ok) {
                     const savedNodes: [string, string][] = await res.json();
                     if (savedNodes.length > 0) {
