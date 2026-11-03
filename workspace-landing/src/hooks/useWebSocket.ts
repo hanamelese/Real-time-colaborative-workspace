@@ -1,3 +1,6 @@
+
+
+
 // 'use client';
 
 // import { useEffect, useRef, useState, useCallback } from 'react';
@@ -25,7 +28,8 @@
 //         if (!isMountedRef.current) return;
 
 //         setStatus('Connecting');
-//         const ws = new WebSocket(`ws://127.0.0.1:8080/ws/${roomId}`);
+//         // Ensure this matches your exact Railway domain spelling (colaborative with one 'o')
+//         const wsUrl = `wss://real-time-colaborative-workspace-production.up.railway.app/ws/${roomId}`; const ws = new WebSocket(wsUrl);
 //         socketRef.current = ws;
 
 //         ws.onopen = () => {
@@ -58,7 +62,7 @@
 //                 connect();
 //             }, 2000); // Back off to 2 seconds for quicker recovery if needed
 //         };
-//     }, [roomId]); // Removed onMessage dependency to prevent unwanted connection re-drops
+//     }, [roomId]);
 
 //     useEffect(() => {
 //         isMountedRef.current = true;
@@ -86,6 +90,7 @@
 
 
 
+
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
@@ -103,7 +108,6 @@ export function useWebSocket({ roomId, onMessage }: UseWebSocketOptions) {
     const reconnectTimeoutRef = useRef<NodeJS.Timeout | null>(null);
     const isMountedRef = useRef<boolean>(true);
 
-    // Keep a stable ref to onMessage so it never forces socket re-connections on re-renders
     const onMessageRef = useRef(onMessage);
     useEffect(() => {
         onMessageRef.current = onMessage;
@@ -113,8 +117,11 @@ export function useWebSocket({ roomId, onMessage }: UseWebSocketOptions) {
         if (!isMountedRef.current) return;
 
         setStatus('Connecting');
-        // Ensure this matches your exact Railway domain spelling (colaborative with one 'o')
-        const wsUrl = `wss://real-time-colaborative-workspace-production.up.railway.app/ws/${roomId}`; const ws = new WebSocket(wsUrl);
+
+        // Cleanly separated declaration and instantiation
+        const wsUrl = `wss://real-time-colaborative-workspace-production.up.railway.app/ws/${roomId}`;
+        const ws = new WebSocket(wsUrl);
+
         socketRef.current = ws;
 
         ws.onopen = () => {
@@ -145,7 +152,7 @@ export function useWebSocket({ roomId, onMessage }: UseWebSocketOptions) {
             if (reconnectTimeoutRef.current) clearTimeout(reconnectTimeoutRef.current);
             reconnectTimeoutRef.current = setTimeout(() => {
                 connect();
-            }, 2000); // Back off to 2 seconds for quicker recovery if needed
+            }, 2000);
         };
     }, [roomId]);
 
