@@ -1,6 +1,4 @@
 
-
-
 // use axum::{
 //     extract::ws::{Message, WebSocket, WebSocketUpgrade},
 //     extract::Path,
@@ -70,11 +68,13 @@
 //         .allow_headers(Any);
 
 //     let app = Router::new()
-//         .route("/ws/:room_id", get(ws_handler))
-//         .route("/api/rooms/:room_id/nodes", get(get_room_nodes))
-//         .layer(cors)
-//         .with_state(app_state);
-// // Read Railway's PORT environment variable, or fallback to 8080 locally
+//     .route("/", get(health_check))
+//     .route("/ws/{room_id}", get(ws_handler))
+//     .route("/api/rooms/{room_id}/nodes", get(get_room_nodes))
+//     .layer(cors)
+//     .with_state(app_state);
+
+//     // Read Railway's PORT environment variable, or fallback to 8080 locally
 //     let port = std::env::var("PORT")
 //         .unwrap_or_else(|_| "8080".to_string())
 //         .parse::<u16>()
@@ -82,11 +82,6 @@
 
 //     let addr = SocketAddr::from(([0, 0, 0, 0], port));
 //     println!("🚀 Rust Real-Time Sync Server running at http://{}", addr);
-
-//     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
-//     axum::serve(listener, app).await.unwrap();
-//     // let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
-//     // println!("🚀 Rust Real-Time Sync Server with SQLite running at ws://{}", addr);
 
 //     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
 //     axum::serve(listener, app).await.unwrap();
@@ -117,6 +112,11 @@
 //         Ok(data) => axum::Json(data),
 //         Err(_) => axum::Json(vec![]),
 //     }
+// }
+
+// // Health check handler for root URL
+// async fn health_check() -> &'static str {
+//     "🚀 Rust Real-Time Sync Server is live and running!"
 // }
 // // Handle socket stream, broadcast pipeline, and database persistence
 // async fn handle_socket(socket: WebSocket, room_id: String, state: AppState) {
@@ -182,8 +182,10 @@
 //     tokio::select! {
 //         _ = (&mut send_task) => recv_task.abort(),
 //         _ = (&mut recv_task) => send_task.abort(),
-//     };
+//     }
 // }
+
+
 
 
 use axum::{
