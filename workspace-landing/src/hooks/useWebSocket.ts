@@ -113,8 +113,8 @@ export function useWebSocket({ roomId, onMessage }: UseWebSocketOptions) {
         if (!isMountedRef.current) return;
 
         setStatus('Connecting');
-        const wsUrl = `wss://real-time-collaborative-workspace-production.up.railway.app/ws/${roomId}`;
-        const ws = new WebSocket(wsUrl);
+        // Ensure this matches your exact Railway domain spelling (colaborative with one 'o')
+        const wsUrl = `wss://real-time-colaborative-workspace-production.up.railway.app/ws/${roomId}`; const ws = new WebSocket(wsUrl);
         socketRef.current = ws;
 
         ws.onopen = () => {
