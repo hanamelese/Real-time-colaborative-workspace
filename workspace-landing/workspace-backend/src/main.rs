@@ -71,11 +71,18 @@ async fn main() {
         .allow_methods(Any)
         .allow_headers(Any);
 
+    // let app = Router::new()
+    // .route("/", get(health_check))
+    // .route("/test", get(test_route))
+    // .route("/ws/{room_id}", get(ws_handler))
+    // .route("/api/rooms/{room_id}/nodes", get(get_room_nodes))
+    // .layer(cors)
+    // .with_state(app_state);
+
     let app = Router::new()
     .route("/", get(health_check))
-    .route("/test", get(test_route))
-    .route("/ws/{room_id}", get(ws_handler))
-    .route("/api/rooms/{room_id}/nodes", get(get_room_nodes))
+    .route("/ws/:room_id", get(ws_handler))
+    .route("/api/rooms/:room_id/nodes", get(get_room_nodes))
     .layer(cors)
     .with_state(app_state);
 
